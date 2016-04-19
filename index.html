@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Lisa's Portfolio</title>
+  </head>
+  <body>
+    <section ng-include="'app/templates/nav-bar.html'">
+
+    </section>
+    <main>
+      <section class="repo-class" ng-include="'app/templates/repo.html'"></section>
+      Main content here
+      <repos></repos>
+    </main>
+    <footer>
+      Our Footer
+    </footer>
+    <customnav></customnav>
+    </section>
+<script type="text/javascript" src="/build/bundle.js"></script>
+<!-- <script type="text/javascript" src="./app/app.js"> -->
+
+<!-- </script> -->
+  </body>
+</html>
