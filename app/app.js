@@ -1,37 +1,46 @@
 'use strict';
-var angular = require('angular');
 
-var app = angular.module('app', []);
 
-app.directive('customNav', function(){
+(function(){
+  var contact = { name: ' Lisa Wenke', phone: '206-383-1273', email: 'lwenke@gmail.com'};
+  var gitRoute = 'https://api.github.com/users/lwenke01';
+  var app = angular.module("myPortfolio", []);
+
+app.directive('customContact', function(){
   return {
     restrict: 'E',
-    templateUrl: './templates/nav-bar.html'
+    templateUrl: './templates/portfolio-contact.html',
+    controller:function(){
+      this.userInfo = contact;
 
-  };
+  },
+  controllerAs: 'contactCtrl'
+};
 });
 
-// app.directive('customRepo', function(){
-//   return {
-//     restrict: 'EA',
-//     templateUrl: './templates/repo.html',
-//     controller: function($http) {
-//       var vm = this;
-//       vm.repos = [];
-//       vm.starred = [];
-//       $http.get('https://api.github.com/users/lwenke01/repos')
-//       .then((result)=>{
-//         console.log(result.data);
-//         vm.repos = result.data;
-//
-//       }, function(error){
-//         console.log(error);
-//       });
-//       $http.get('https://api.github.com/users/lwenke01/starred')
-//       .then((result)=>{
-//         vm.starred = result.data;
-//       });
-//     },
-//     controllerAs: 'repoCtrl'
-//   };
-// });
+
+  app.directive('customNav', function(){
+    return {
+      restrict: 'E',
+      templateUrl: './templates/portfolio-tabs.html'
+
+    };
+  });
+
+  app.directive('customRepo', function(){
+    return {
+      restrict: 'EA',
+      templateUrl: './templates/portfolio-repo.html',
+      controller:function($http){
+        $http.get(gitRoute + '/' + 'repos')
+        .then((result)=>{
+          this.repos = result.data;
+        });
+
+    },
+    controllerAs: 'repoCtrl'
+  };
+  });
+
+
+})();

@@ -1,0 +1,20 @@
+body {
+ background-color: red;
+}
+
+main {
+  margin: auto;
+  border-radius: 5em;
+  border-color: red;
+}
+
+.repo-wrapper {
+  margin-left: 3em;
+  display: flex;
+}
+.repo-wrapper .repo-link {
+  /*display: flex;*/
+  flex-direction: column;
+  justify-content: center;
+
+}
