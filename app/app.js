@@ -22,15 +22,26 @@ app.directive('customContact', function(){
   app.directive('customNav', function(){
     return {
       restrict: 'E',
-      templateUrl: './templates/portfolio-tabs.html'
+      templateUrl: './templates/portfolio-tabs.html',
+      controller: function(){
+        this.tab = 1;
+
+        this.isSet = function(check){
+          return this.tab === check;
+        };
+        this.setTab = function(active){
+          this.tab = active;
+        };
+      },
+      controllerAs: 'tabCtrl'
 
     };
   });
 
-  app.directive('customRepo', function(){
+  app.directive('customProject', function(){
     return {
       restrict: 'EA',
-      templateUrl: './templates/portfolio-repo.html',
+      templateUrl: './templates/portfolio-projects.html',
       controller:function($http){
         $http.get(gitRoute + '/' + 'repos')
         .then((result)=>{
@@ -38,9 +49,22 @@ app.directive('customContact', function(){
         });
 
     },
-    controllerAs: 'repoCtrl'
+    controllerAs: 'projectCtrl'
   };
   });
+app.directive('customHome', function(){
+  return {
+    restrict: 'EA',
+    templateUrl: './templates/portfolio-home.html',
+    controller:function($http){
+      $http.get(gitRoute)
+      .then((result)=>{
+        this.user = result.data;
+      });
+    },
+    controllerAs:'homeCtrl'
+  };
+});
 
 
 })();

@@ -1,9 +1,0 @@
-<section class="repo-link" ng-repeat="repo in repoCtrl.repos | filter: {stargazers_count:'!0'} | orderBy:'-created_at'" ng-cloak>
-<h1>{{repo.name}}</h1>
-<a href="{{repo.html_url}}">Go To Repo</a>
-<p>Date Created: {{repo.created_at | date: format: short}}</p>
-<p>Description: {{repo.description}}</p>
-
-
-
-</section>
