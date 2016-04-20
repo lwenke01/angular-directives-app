@@ -1,0 +1,23 @@
+
+
+* {
+
+  border-color: red;
+}
+.navbar{
+  display: block;
+  /*margin-left: 5em;*/
+  background-color: lightblue;
+  /*text-align: center;*/
+}
+
+/*.repo-wrapper {
+  margin-left: 3em;
+  display: flex;
+}
+.repo-wrapper .repo-link {
+  /*display: flex;*/
+  flex-direction: column;
+  justify-content: center;
+
+}*/

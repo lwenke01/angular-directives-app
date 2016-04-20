@@ -1,39 +1,100 @@
 'use strict';
-var angular = require('angular');
 
-var app = angular.module('app', []);
 
-app.directive('customnav', function(){
+(function(){
+  var contact = { name: ' Lisa Wenke', phone: '206-383-1273', email: 'lwenke@gmail.com'};
+
+  var gitRoute = 'https://api.github.com/users/lwenke01';
+  var gitRoute = 'https://api.github.com/users/lwenke01';
+  var app = angular.module("myPortfolio", []);
+
+app.directive('customContact', function(){
   return {
     restrict: 'E',
-    templateUrl: 'templates/nav-bar.html',
-    controller: function(){
-      var vm = this;
-      vm .active = 'Home'
+    templateUrl: './templates/portfolio-contact.html',
+    controller:function($http){
+      this.userInfo = contact;
+      // this.formData = {};
+      // this.processForm = function
+      // $http.get()
+
+  },
+  controllerAs: 'contactCtrl'
+};
+});
+
+
+  app.directive('customNav', function(){
+    return {
+      restrict: 'E',
+      templateUrl: './templates/portfolio-tabs.html',
+      controller: function(){
+        this.tab = 1;
+
+        this.isSet = function(check){
+          return this.tab === check;
+        };
+        this.setTab = function(active){
+          this.tab = active;
+        };
+      },
+      controllerAs: 'tabCtrl'
+
+    };
+  });
+
+  app.directive('customProject', function(){
+    return {
+      restrict: 'EA',
+      templateUrl: './templates/portfolio-projects.html',
+      controller:function($http){
+        $http.get(gitRoute + '/' + 'repos')
+        .then((result)=>{
+          this.repos = result.data;
+        });
+
     },
-    controllerAs: 'navbarCtrl'
+    controllerAs: 'projectCtrl'
+  };
+  });
+app.directive('customHome', function(){
+  return {
+    restrict: 'E',
+    templateUrl: './templates/portfolio-home.html',
+    controller:function($http){
+      $http.get(gitRoute)
+      .then((result)=>{
+        this.user = result.data;
+      });
+    },
+    controllerAs:'homeCtrl'
   };
 });
 
-app.directive('repos', function(){
+app.directive('customResume', function(){
   return {
-    restrict: 'EA',
-    templateUrl: 'templates/repos.html',
-    controller: function($http) {
-      var vm = this;
-      vm.repos = [];
-      vm.starred = [];
-      $http.get('https://api.github.com/users/lwenke01/repos')
+    retrict: 'E',
+    templateUrl: './templates/portfolio-resume.html',
+    controller:function($http){
+      $http.get('./data/educationData.json')
       .then((result)=>{
-        vm.repos = result.data;
-      }, function(error){
-        console.log(error);
+        this.schools = result.data;
+
       });
-      $http.get('https://api.github.com/users/lwenke01/starred')
+      $http.get('./data/employmentData.json')
       .then((result)=>{
-        vm.starred = result.data;
+        this.jobs = result.data;
       });
     },
-    controllerAs: 'repoCtrl'
+    controllerAs: 'resumeCtrl'
   };
 });
+app.directive('customResources', function(){
+  return {
+    restrict: 'E',
+    templateUrl: './templates/portfolio-resources.html'
+  };
+});
+
+
+})();
