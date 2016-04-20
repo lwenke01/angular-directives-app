@@ -1,12 +1,17 @@
 
 
-main {
-  margin: auto;
-  border-radius: 5em;
+* {
+
   border-color: red;
 }
+.navbar{
+  display: block;
+  /*margin-left: 5em;*/
+  background-color: lightblue;
+  /*text-align: center;*/
+}
 
-.repo-wrapper {
+/*.repo-wrapper {
   margin-left: 3em;
   display: flex;
 }
@@ -15,4 +20,4 @@ main {
   flex-direction: column;
   justify-content: center;
 
-}
+}*/

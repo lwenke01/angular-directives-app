@@ -3,6 +3,8 @@
 
 (function(){
   var contact = { name: ' Lisa Wenke', phone: '206-383-1273', email: 'lwenke@gmail.com'};
+
+  var gitRoute = 'https://api.github.com/users/lwenke01';
   var gitRoute = 'https://api.github.com/users/lwenke01';
   var app = angular.module("myPortfolio", []);
 
@@ -10,8 +12,11 @@ app.directive('customContact', function(){
   return {
     restrict: 'E',
     templateUrl: './templates/portfolio-contact.html',
-    controller:function(){
+    controller:function($http){
       this.userInfo = contact;
+      // this.formData = {};
+      // this.processForm = function
+      // $http.get()
 
   },
   controllerAs: 'contactCtrl'
@@ -54,7 +59,7 @@ app.directive('customContact', function(){
   });
 app.directive('customHome', function(){
   return {
-    restrict: 'EA',
+    restrict: 'E',
     templateUrl: './templates/portfolio-home.html',
     controller:function($http){
       $http.get(gitRoute)
@@ -63,6 +68,31 @@ app.directive('customHome', function(){
       });
     },
     controllerAs:'homeCtrl'
+  };
+});
+
+app.directive('customResume', function(){
+  return {
+    retrict: 'E',
+    templateUrl: './templates/portfolio-resume.html',
+    controller:function($http){
+      $http.get('./data/educationData.json')
+      .then((result)=>{
+        this.schools = result.data;
+
+      });
+      $http.get('./data/employmentData.json')
+      .then((result)=>{
+        this.jobs = result.data;
+      });
+    },
+    controllerAs: 'resumeCtrl'
+  };
+});
+app.directive('customResources', function(){
+  return {
+    restrict: 'E',
+    templateUrl: './templates/portfolio-resources.html'
   };
 });
 
