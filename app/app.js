@@ -62,7 +62,7 @@
       retrict: 'E',
       templateUrl: './templates/portfolio-resume.html',
       controller:function($http){
-        $http.get('./data/educationData.json')
+        $http.get('./data-json/educationData.json')
         .then((result)=>{
           this.schools = result.data;
         });
